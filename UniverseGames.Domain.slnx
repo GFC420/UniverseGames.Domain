@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="UniverseGames.API/UniverseGames.API.csproj" Id="07ee9c87-4119-4e9e-aac5-7bf874496467" />
+  <Project Path="UniverseGames.Application/UniverseGames.Application.csproj" />
+  <Project Path="UniverseGames.Domain/UniverseGames.Domain.csproj" />
+  <Project Path="UniverseGames.Infrastructure/UniverseGames.Infrastructure.csproj" />
+  <Project Path="UniverseGames.UI/UniverseGames.UI.csproj" />
+  <Project Path="UniverseGames.Web/UniverseGames.Web.csproj" Id="969340bb-d0e9-46ec-85a5-0c87ff30197a" />
+</Solution>
