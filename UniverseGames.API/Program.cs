@@ -12,7 +12,11 @@ builder.Services.AddSwaggerGen();
 
 // 🔥 BANCO SQL SERVER (AQUI 👇)
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer("Server=localhost;Database=UniverseGamesDB;Trusted_Connection=True;TrustServerCertificate=True;"));
+    options.UseSqlServer(
+        "Server=(localdb)\\MSSQLLocalDB;Database=UniverseGamesDB;Trusted_Connection=True;TrustServerCertificate=True;",
+        b => b.MigrationsAssembly("UniverseGames.Infrastructure")
+    )
+);
 
 var app = builder.Build();
 

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-// Verifique se o caminho do seu DbContext é este mesmo:
-// using UniverseGames.Infrastructure.Data; 
+using UniverseGames.Infrastructure.Data;
 
 namespace UniverseGames.API.Controllers
 {
@@ -10,9 +9,9 @@ namespace UniverseGames.API.Controllers
     public class DashboardController : ControllerBase
     {
         // Injeção do Banco de Dados
-        private readonly UniverseGamesDbContext _db;
+        private readonly AppDbContext _db;
 
-        public DashboardController(UniverseGamesDbContext db)
+        public DashboardController(AppDbContext db)
         {
             _db = db;
         }

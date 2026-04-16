@@ -12,5 +12,8 @@
         public List<ItemPedido> Itens { get; set; }
 
         public Pagamento Pagamento { get; set; }
+        public string Status { get; set; }
+        public decimal? Total { get; set; }
+        public DateTime DataPedido { get; set; }
     }
 }

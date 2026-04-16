@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UniverseGames.API.DTOs;
-using UniverseGames.API.Services;
+using UniverseGames.Application.DTOs;
+using UniverseGames.Application.Services;
 
 namespace UniverseGames.API.Controllers
 {

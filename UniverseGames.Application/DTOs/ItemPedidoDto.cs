@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace UniverseGames.Application.DTOs
+﻿namespace UniverseGames.Application.DTOs
 {
     public class ItemPedidoDto
     {

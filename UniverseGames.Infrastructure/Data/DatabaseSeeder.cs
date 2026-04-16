@@ -2,7 +2,6 @@
 using System.Security.Cryptography;
 using System.Text;
 using UniverseGames.Domain.Entities;
-using UniverseGames.Infrastructure.Data;
 
 namespace UniverseGames.Infrastructure.Data
 {
@@ -75,24 +74,33 @@ namespace UniverseGames.Infrastructure.Data
 
             if (!usuarios.Any() || !produtos.Any()) return;
 
+            // 🔥 Criando itens primeiro
+            var item1 = new ItemPedido
+            {
+                ProdutoId = produtos[0].Id,
+                Quantidade = 2
+            };
+
+            var item2 = new ItemPedido
+            {
+                ProdutoId = produtos[1].Id,
+                Quantidade = 1
+            };
+
+            // 🔥 Calculando total corretamente
+            var total =
+                (produtos[0].Preco * item1.Quantidade) +
+                (produtos[1].Preco * item2.Quantidade);
+
             var pedido = new Pedido
             {
                 UsuarioId = usuarios.First().Id,
                 Data = DateTime.Now,
-                Itens = new List<ItemPedido>()
+                DataPedido = DateTime.Now,
+                Status = "Pendente",
+                Total = total,
+                Itens = new List<ItemPedido> { item1, item2 }
             };
-
-            pedido.Itens.Add(new ItemPedido
-            {
-                ProdutoId = produtos[0].Id,
-                Quantidade = 2
-            });
-
-            pedido.Itens.Add(new ItemPedido
-            {
-                ProdutoId = produtos[1].Id,
-                Quantidade = 1
-            });
 
             db.Pedidos.Add(pedido);
 

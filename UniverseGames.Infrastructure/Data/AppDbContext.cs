@@ -20,9 +20,10 @@ namespace UniverseGames.Infrastructure.Data
             public DbSet<Categoria> Categorias { get; set; }
             public DbSet<Pedido> Pedidos { get; set; }
             public DbSet<ItemPedido> ItensPedido { get; set; }
-            //public DbSet<Review> Reviews { get; set; }
-            //public DbSet<Pagamento> Pagamentos { get; set; }
-            //public DbSet<Carrinho> Carrinhos { get; set; }
-        }
+            public DbSet<ItemPedido> Clientes { get; set; }
+        //public DbSet<Review> Reviews { get; set; }
+        //public DbSet<Pagamento> Pagamentos { get; set; }
+        //public DbSet<Carrinho> Carrinhos { get; set; }
+    }
     }
 
