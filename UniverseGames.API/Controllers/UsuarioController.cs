@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UniverseGames.Application.DTOs;
-using UniverseGames.Infrastructure.Data;
+using UniverseGames.Application.Services;
 using UniverseGames.Domain.Entities;
+using UniverseGames.Infrastructure.Data;
 
 namespace UniverseGames.Api.Controllers
 {
@@ -11,25 +12,12 @@ namespace UniverseGames.Api.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly UsuarioService _usuarioService;
 
-        public UsuarioController(AppDbContext context)
+        public UsuarioController(AppDbContext context, UsuarioService usuarioService)
         {
-            _context = context;
-        }
-
-        // 🔥 GET - listar usuários
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var usuarios = await _context.Usuarios
-                .Select(u => new UsuarioDto
-                {
-                    Email = u.Email,
-                    Senha = u.Senha
-                })
-                .ToListAsync();
-
-            return Ok(usuarios);
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _usuarioService = usuarioService ?? throw new ArgumentNullException(nameof(usuarioService));
         }
 
         // 🔥 POST - criar usuário
@@ -45,7 +33,26 @@ namespace UniverseGames.Api.Controllers
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 
-            return Ok("Usuário criado com sucesso");
+            var result = new { message = "Usuário criado com sucesso", id = usuario.Id };
+            return CreatedAtAction(nameof(ObterPorId), new { id = usuario.Id }, result);
+        }
+
+        // GET por id usado por CreatedAtAction
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ObterPorId(int id)
+        {
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
+                return NotFound(new { message = "Usuário não encontrado" });
+
+            var dto = new UsuarioDto
+            {
+                Id = usuario.Id,
+                Email = usuario.Email,
+                Senha = usuario.Senha
+            };
+
+            return Ok(dto);
         }
 
         // 🔥 LOGIN
@@ -56,12 +63,19 @@ namespace UniverseGames.Api.Controllers
                 .FirstOrDefaultAsync(u => u.Email == login.Email);
 
             if (usuario == null)
-                return Unauthorized("Usuário não encontrado");
+                return Unauthorized(new { message = "Usuário não encontrado" });
 
             if (usuario.Senha != login.Senha)
-                return Unauthorized("Senha inválida");
+                return Unauthorized(new { message = "Senha inválida" });
 
-            return Ok("Login realizado");
+            return Ok(new { message = "Login realizado" });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ListarTodos()
+        {
+            var usuarios = await _usuarioService.ListarTodosAsync();
+            return Ok(usuarios);
         }
     }
 }

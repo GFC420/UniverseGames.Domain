@@ -14,7 +14,7 @@ namespace UniverseGames.Infrastructure.Data
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
             optionsBuilder.UseSqlServer(
-                "Server=localhost;Database=UniverseGamesDB;Trusted_Connection=True;TrustServerCertificate=True;"
+                "Server=(localdb)\\MSSQLLocalDB;Database=UniverseGamesDB;Trusted_Connection=True;TrustServerCertificate=True;"
             );
 
             return new AppDbContext(optionsBuilder.Options);

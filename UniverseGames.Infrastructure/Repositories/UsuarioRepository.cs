@@ -20,9 +20,8 @@ namespace UniverseGames.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Usuario>> ListarTodosAsync()
-        {
-            return await _context.Usuarios.ToListAsync();
-        }
+            => await _context.Usuarios.ToListAsync();
+
 
         public async Task AdicionarAsync(Usuario usuario)
         {

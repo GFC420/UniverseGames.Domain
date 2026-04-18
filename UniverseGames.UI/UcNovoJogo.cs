@@ -8,19 +8,14 @@ using System.Windows.Forms;
 
 namespace UniverseGames.UI
 {
-    public partial class UcUsuarios : UserControl
+    public partial class UcNovoJogo : UserControl
     {
-        public UcUsuarios()
+        public UcNovoJogo()
         {
             InitializeComponent();
         }
 
-        private void guna2HtmlLabel3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2HtmlLabel4_Click(object sender, EventArgs e)
+        private void guna2HtmlLabel5_Click(object sender, EventArgs e)
         {
 
         }
